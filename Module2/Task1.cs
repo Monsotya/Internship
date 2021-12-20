@@ -5,13 +5,13 @@ public class Task1{
 
     public static void Main(){
         SolarSystem[] solarSystems;
-        /*for (int i = 0; i < 15; i++){
+        for (int i = 0; i < 15; i++){
             solarSystems += CreateSolarSystem();
         }
         GalaxySector galaxySector = new GalaxySector(solarSystems);*/
 
     }
-    /*public static SolarSystem CreateSolarSystem()
+    public static SolarSystem CreateSolarSystem()
     {
         Star[] stars;
         Planet[] planets;
@@ -30,5 +30,5 @@ public class Task1{
 
         return new SolarSystem(stars, planets);
 
-    }*/
+    }
 }
