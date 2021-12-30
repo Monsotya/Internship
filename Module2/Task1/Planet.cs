@@ -23,7 +23,7 @@ namespace Task1{
             set
             {
                 if (value < 0) {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Age must be a positive number!");
                 }
 
                 _age = value;

@@ -16,7 +16,14 @@ namespace Task1
             }
             GalaxySector galaxySector = new GalaxySector(solarSystems, "Galaxy sector");
             Planet[] planets = galaxySector.PlanetsWithMoons();
-            foreach(Planet planet in planets)
+            RedStar[] redStars = galaxySector.FindRedStars();
+            Console.WriteLine("Red stars:\n\n");
+            foreach (RedStar star in redStars)
+            {
+                Console.WriteLine(star.ToString() + " ");
+            }
+            Console.WriteLine("\n\nPlanets with moons:\n\n");
+            foreach (Planet planet in planets)
             {
                 Console.WriteLine(planet.ToString() + " ");
             }
@@ -24,13 +31,20 @@ namespace Task1
         }
         public static SolarSystem CreateSolarSystem()
         {
-            List<Star> stars = new List<Star>();
+            List<IStar> stars = new List<IStar>();
             List<Planet> planets = new List<Planet>();
             Random random = new Random();
 
             for (int i = 0; i < random.Next(1, 4); i++)
             {
-                stars.Add(new Star(random.Next(1000, 10000), "Star" + random.Next(1,1000).ToString()));
+                if (random.Next(0, 2) != 0)
+                {
+                    stars.Add(new RedStar(random.Next(1000, 10000), "RedStar" + random.Next(1, 1000).ToString()));
+                }
+                else
+                {
+                    stars.Add(new BlueStar(random.Next(1000, 10000), "BlueStar" + random.Next(1, 1000).ToString()));
+                }
             }
 
             for (int i = 0; i < random.Next(0, 10); i++)

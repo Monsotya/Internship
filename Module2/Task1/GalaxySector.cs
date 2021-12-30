@@ -39,6 +39,36 @@ namespace Task1
             return planets.ToArray();
         }
 
+        public RedStar[] FindRedStars()
+        {
+            List<RedStar> stars = new List<RedStar>();
+
+            foreach (SolarSystem solarSystem in this._solarSystems)
+            {
+                foreach (RedStar star in solarSystem.RedStars())
+                {
+                    stars.Add(star);
+                }
+            }
+
+            return stars.ToArray();
+        }
+
+        public BlueStar[] FindBlueStar()
+        {
+            List<BlueStar> stars = new List<BlueStar>();
+
+            foreach (SolarSystem solarSystem in this._solarSystems)
+            {
+                foreach (BlueStar star in solarSystem.BlueStars())
+                {
+                    stars.Add(star);
+                }
+            }
+
+            return stars.ToArray();
+        }
+
         public Planet[] HabitablePlanets()
         {
             List<Planet> planets = new List<Planet>();

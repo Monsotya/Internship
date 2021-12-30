@@ -6,12 +6,12 @@ namespace Task1
 {
     public class SolarSystem
     {
-        private Star[] _stars;
+        private IStar[] _stars;
         private Planet[] _planets;
         private String _name;
 
 
-        public SolarSystem(Star[] stars, Planet[] planets, String name)
+        public SolarSystem(IStar[] stars, Planet[] planets, String name)
         {
             this.Stars = stars;
             this.Planets = planets;
@@ -57,14 +57,42 @@ namespace Task1
             set => this._name = value;
         }
 
-        public Star[] Stars
+        public RedStar[] RedStars()
+        {
+            List<RedStar> stars = new List<RedStar>();
+
+            foreach (var star in _stars)
+            {
+                if (star.GetType() == typeof(RedStar))
+                {
+                    stars.Add((RedStar)star);
+                }
+            }
+            return stars.ToArray();
+        }
+
+        public BlueStar[] BlueStars()
+        {
+            List<BlueStar> stars = new List<BlueStar>();
+
+            foreach (var star in _stars)
+            {
+                if (star.GetType() == typeof(BlueStar))
+                {
+                    stars.Add((BlueStar)star);
+                }
+            }
+            return stars.ToArray();
+        }
+
+        public IStar[] Stars
         {
             get => _stars;
             set
             {
                 if (value.Length == 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("There must be at list one star!");
                 }
 
                 _stars = value;
@@ -81,7 +109,7 @@ namespace Task1
             else
             {
                 stars.Append("s: ");
-                foreach (Star star in this._stars)
+                foreach (var star in this._stars)
                 {
                     stars.Append(star.ToString() + ", ");
                 }

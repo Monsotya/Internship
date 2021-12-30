@@ -2,17 +2,17 @@ using System;
 
 namespace Task1
 {
-    public class Star
+    public class RedStar : IStar
     {
         private int _age;
         private String _name;
-
-        public Star(int age, String name)
+        public RedStar(int age, String name)
         {
             this.Age = age;
             this.Name = name;
         }
-        public string Name { get; set; }
+
+        public string Name { get => _name; set => _name = value; }
 
         public int Age
         {
@@ -21,7 +21,7 @@ namespace Task1
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Age must be a positive number!");
                 }
 
                 _age = value;
@@ -29,7 +29,7 @@ namespace Task1
         }
         public override string ToString()
         {
-            return $"{this._name}";
+            return $"Red star: {this._name}";
         }
     }
 }

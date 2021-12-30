@@ -9,9 +9,8 @@ namespace Module3
             Console.WriteLine("Enter file pathes");
             String[] pathes = Console.ReadLine().Split(",");
             Console.WriteLine("Enter words you want to find");
-            String[] words = Console.ReadLine().Split(","); ;
-            WordSearchEngine obj = new WordSearchEngine(words, pathes);
-            obj.FindAllMatches();
+            String[] words = Console.ReadLine().Split(',');
+            WordSearchEngine.FindAllMatches(pathes, words);
         }
     }
 }

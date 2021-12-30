@@ -5,69 +5,45 @@ using System.Linq;
 
 namespace Module3
 {
-    class WordSearchEngine
+    static class WordSearchEngine
     {
-        private String[] words;
-        private String[] pathes;
-        private int[] countWords;
         public delegate void FoundWord(String file, String word, int line);
-        public event FoundWord Notify;
-        public String[] Words { get => words;
-            set
-            {
-                for (int i = 0; i < value.Length; i++)
-                {
-                    value[i] = value[i].Replace(" ", string.Empty);
-                    if (value[i] == string.Empty)
-                    {
-                        throw new Exception();
-                    }
-                }
-                words = value;
-            }
-        }
+        public static event FoundWord Notify;
 
-        public String[] Pathes { get => pathes;
-            set
-            {
-                for (int i = 0; i <  value.Length; i++)
-                {
-                    value[i] = value[i].Replace(" ", string.Empty);
-                    if (!File.Exists(value[i]))
-                    {
-                        throw new Exception();
-                    }
-                    String fileType = Path.GetExtension(value[i]);
-                    if (!(fileType == ".txt" || fileType == ".xml" || fileType == ".html"))
-                    {
-                        throw new Exception();
-                    }
-                }
-                pathes = value;
-            }        
-        }
-        public WordSearchEngine(String[] words, String[] pathes)
-        {
-            this.Words = words;
-            this.Pathes = pathes;
-            if (words.Length != pathes.Length)
-            {
-                throw new Exception();
-            }
-            this.countWords = new int[words.Length];
-            this.Notify = new FoundWord(DisplayMessage);
-        }
-
-        public void DisplayMessage(String file, String word, int line)
+        public static void DisplayMessage(String file, String word, int line)
         {
             Console.WriteLine($"Scanning {file}, found {word} in the {line} line");
         }
 
-        public void FindAllMatches()
+        public static void FindAllMatchesOneWord(String[] pathes, String word)
         {
-            for(int i = 0; i < pathes.Length; i++)
+            WordSearchEngine.Notify = new FoundWord(DisplayMessage);
+            CheckPathes(pathes);
+            int[] countWords = new int[pathes.Length];
+            for (int i = 0; i < pathes.Length; i++)
             {
-                FindWord(i);
+                countWords[i] = FindWord(pathes[i], word);
+                Console.WriteLine($"\nFile name: {Path.GetFileName(pathes[i])}, word: {word}, count: {countWords[i]}\n");
+            }
+            Console.WriteLine($"\nTotal finds: {countWords.Sum()}\nTotal files scanned: {pathes.Length}");
+        }
+
+        public static void FindAllMatches(String[] pathes, String[] words)
+        {
+            WordSearchEngine.Notify = new FoundWord(DisplayMessage);
+            CheckPathes(pathes);
+            CheckWords(words);
+
+            if (words.Length != pathes.Length)
+            {
+                throw new Exception("Quantity of words and pathes should be equal!");
+            }
+
+            int[] countWords = new int[pathes.Length];
+            for (int i = 0; i < pathes.Length; i++)
+            {
+                countWords[i] = FindWord(pathes[i], words[i]);
+
             }
             Console.WriteLine("\n");
             for (int i = 0; i < pathes.Length; i++)
@@ -75,34 +51,70 @@ namespace Module3
                 Console.WriteLine($"File name: {Path.GetFileName(pathes[i])}, word: {words[i]}, count: {countWords[i]}");
             }
 
-            Console.WriteLine($"\nTotal finds: {CountAllWords()}");
+            Console.WriteLine($"\nTotal finds: {countWords.Sum()}\nTotal files scanned: {pathes.Length}\n");
         }
 
-        private void FindWord(int index)
+        private static int FindWord(String path, String word)
         {
-            String[] text = File.ReadAllLines(pathes[index]);
-            int counter = 0;
-            countWords[index] = 0;
-            foreach(String line in text)
+            String[] text;
+            try
             {
-                if (line.Contains(words[index]))
+                text = File.ReadAllLines(path);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
+                return 0;
+            }
+            int counter = 0;
+            int countWords = 0;
+            foreach (String line in text)
+            {
+                if (line.Contains(word))
                 {
-                    Notify.Invoke(Path.GetFileName(pathes[index]), words[index], counter);
-                    countWords[index]++;
+                    Notify.Invoke(Path.GetFileName(path), word, counter);
+                    countWords++;
                     counter--;
                 }
                 counter++;
             }
+            return counter;
         }
-
-        private int CountAllWords()
+        public static void CheckWords(String[] words)
         {
-            int result = 0;
-            foreach(int i in countWords)
+            for (int i = 0; i < words.Length; i++)
             {
-                result += i;
+                words[i] = words[i].Replace(" ", string.Empty);
+                if (words[i] == string.Empty)
+                {
+                    throw new Exception("Word must not be empty!");
+                }
             }
-            return result;
+        }
+        public static void CheckPathes(String[] pathes)
+        {
+            for (int i = 0; i < pathes.Length; i++)
+            {
+                pathes[i] = pathes[i].Replace(" ", string.Empty);
+                try
+                {
+                    if (!File.Exists(pathes[i]))
+                    {
+                        throw new Exception("File path does not exist!");
+                    }
+                    String fileType = Path.GetExtension(pathes[i]);
+                    if (!(fileType == ".txt" || fileType == ".xml" || fileType == ".html"))
+                    {
+                        throw new Exception("Wrong type of file!");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("{0} Exception caught.", e);
+                    pathes[i] = "";
+                }
+
+            }
         }
     }
 }
