@@ -13,14 +13,17 @@ namespace Task1
             Document obj4 = new Document(3, 7, DocumentType.raw);
             Document obj5 = new Document(4, 9, DocumentType.table);
             Document obj6 = new Document(4, 9, DocumentType.table);
+
             List<Document> list1 = new List<Document>();
             List<Document> list2 = new List<Document>();
+
             list1.Add(obj1);
             list1.Add(obj3);
             list1.Add(obj5);
             list2.Add(obj2);
             list2.Add(obj4);
             list2.Add(obj6);
+
             if (Document.Compare(list1, list2))
             {
                 Console.WriteLine("Elements equel");
