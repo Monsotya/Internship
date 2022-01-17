@@ -1,47 +1,57 @@
 CREATE DATABASE Planetarium
 
 CREATE TABLE Performance(
-	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	title varchar(100) NOT NULL,
-	description_event varchar(max),
-	duration time NOT NULL
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	Title varchar(100) NOT NULL,
+	EventDescription varchar(max),
+	Duration time NOT NULL
 )
 
 CREATE TABLE Hall(
-	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	name_hall varchar(30) NOT NULL,
-	capacity tinyint NOT NULL
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	HallName varchar(30) NOT NULL,
+	Capacity tinyint NOT NULL
+)
+
+CREATE TABLE Tier(
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	TierName varchar(30) NOT NULL,
+	Surcharge decimal NOT NULL	
 )
 
 CREATE TABLE Poster(
-	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	performance_id int NOT NULL FOREIGN KEY REFERENCES Performance(id)
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	PerformanceId int NOT NULL FOREIGN KEY REFERENCES Performance(Id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-	date_of_event datetime NOT NULL,
-	hall_id int NOT NULL FOREIGN KEY REFERENCES Hall(id)
+	DateOfEvent datetime NOT NULL,
+	HallId int NOT NULL FOREIGN KEY REFERENCES Hall(Id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
+	
+	Price decimal NOT NULL,
 )
 
 CREATE TABLE Orders(
-	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	date_of_order datetime NOT NULL,
-	name_client varchar(30) NOT NULL,
-	surname_client varchar(30) NOT NULL,
-	email varchar(30) NOT NULL
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	DateOfOrder datetime NOT NULL,
+	ClientName varchar(30) NOT NULL,
+	ClientSurname varchar(30) NOT NULL,
+	Email varchar(30) NOT NULL
 )
 
 CREATE TABLE Ticket(
-	id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
-	poster_id int NOT NULL FOREIGN KEY REFERENCES Poster(id)
+	Id int IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	PosterId int NOT NULL FOREIGN KEY REFERENCES Poster(Id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-	order_id int FOREIGN KEY REFERENCES Orders(id)
+	OrderId int FOREIGN KEY REFERENCES Orders(Id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-	status_ticket varchar(15) DEFAULT 'available',
-	price decimal NOT NULL,
-	place tinyint NOT NULL
+	TicketStatus varchar(15) DEFAULT 'available',
+	Place tinyint NOT NULL,
+	TierId int NOT NULL FOREIGN KEY REFERENCES Tier(Id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
 )
 
