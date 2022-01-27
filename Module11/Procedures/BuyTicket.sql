@@ -1,4 +1,4 @@
-CREATE PROC BuyTicket 
+CREATE PROCEDURE BuyTicket 
 	@ticketId int
 AS
 	IF (SELECT TicketStatus FROM ticket WHERE id = @ticketId) = 'available'

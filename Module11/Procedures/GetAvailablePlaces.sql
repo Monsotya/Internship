@@ -3,7 +3,10 @@ CREATE PROCEDURE GetAvailablePlaces
 	@to DATETIME,
 	@performance varchar(max)
 AS
-	SELECT HallName, DateOfEvent, Price, Count(*) as AvailablePlacesNumber
-    FROM Poster, Performance, Ticket, Hall
-	WHERE Title = @performance AND [Performance].Id = PerformanceId AND [Poster].Id = PosterId AND [Hall].Id = HallId AND DateOfEvent BETWEEN @from AND @to
+	SELECT HallName, DateOfEvent, Price as PriceFrom, Count(1) as AvailablePlacesNumber
+    FROM Poster Po
+	INNER JOIN Performance Pe on (Pe.Id = Po.PerformanceId)
+	INNER JOIN Ticket T on (T.PosterId = Po.Id)
+	INNER JOIN Hall H on (H.Id = Po.HallId)
+	WHERE Title = @performance AND Po.DateOfEvent BETWEEN @from AND @to AND T.TicketStatus = 'available'
 	GROUP BY HallName, DateOfEvent, Price

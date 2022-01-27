@@ -6,7 +6,6 @@ CREATE PROCEDURE CreatePoster
 AS 
 	INSERT INTO Poster(PerformanceId, DateOfEvent, HallId, Price)
 	VALUES (@performanceId, @dateOfEvent, @hallId, @price)
-
 	DECLARE @cnt INT = 0;
 
 WHILE @cnt < (SELECT Capacity FROM Hall WHERE Id = @hallId)

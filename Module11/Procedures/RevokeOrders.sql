@@ -6,6 +6,6 @@ CREATE PROCEDURE RevokeOrders
 AS
      UPDATE Ticket 
 	 SET TicketStatus = 'unavailable', OrderId = NULL 
-	 WHERE [Ticket].place in (SELECT CAST(value AS int) from STRING_SPLIT(@places, ',')) AND (SELECT HallId FROM Poster WHERE Id = PosterId) = @hallid AND (SELECT DateOfEvent FROM Poster WHERE Id = PosterId) BETWEEN @from AND @to
+	 WHERE Place in (SELECT CAST(value AS int) from STRING_SPLIT(@places, ',')) AND (SELECT HallId FROM Poster WHERE Id = PosterId) = @hallid AND (SELECT DateOfEvent FROM Poster WHERE Id = PosterId) BETWEEN @from AND @to
 	
 	

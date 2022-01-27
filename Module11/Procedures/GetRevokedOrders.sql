@@ -4,9 +4,9 @@ CREATE PROCEDURE GetRevokedOrders
 	@hallId int,
 	@places varchar(max)
 AS
-	SELECT Place, Price * Surcharge as Price, [Orders].Id, ClientName, Email 
-		FROM Ticket 
-		INNER JOIN Orders ON([Ticket].OrderId = [Orders].Id) 
-		INNER JOIN Poster ON([Ticket].PosterId = [Poster].Id) 
-		INNER JOIN Tier ON([Ticket].TierId = [Tier].Id) 
-		WHERE [Ticket].place in (SELECT CAST(value AS int) FROM STRING_SPLIT(@places, ',')) AND (SELECT HallId FROM Poster WHERE Id = PosterId) = @hallid AND (SELECT DateOfEvent FROM Poster WHERE Id = PosterId) BETWEEN @from AND @to
+	SELECT Place, Price * Surcharge as Price, O.Id, ClientName, Email 
+		FROM Ticket T
+		INNER JOIN Orders O ON(T.OrderId = O.Id) 
+		INNER JOIN Poster P ON(T.PosterId = P.Id) 
+		INNER JOIN Tier Ti ON(T.TierId = Ti.Id) 
+		WHERE T.place in (SELECT CAST(value AS int) FROM STRING_SPLIT(@places, ',')) AND P.HallId = @hallid AND P.DateOfEvent BETWEEN @from AND @to
