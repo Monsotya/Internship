@@ -14,14 +14,14 @@ VALUES
 
 INSERT INTO Performance(Title, EventDescription, Duration)
 VALUES
-	('Views of the universe in hubble’s eye', 
-	'Thanks to “Hubble” the beauty of the Universe has been revealed', '02:30:00'),
+	('Views of the universe in hubble`s eye', 
+	'Thanks to "Hubble" the beauty of the Universe has been revealed', '02:30:00'),
 	('Distant worlds - alien life', 'The night sky is really a view to infinity', '01:35:00'),
 	('The sun, our living star', 'The sunlight that warms our skin today has been felt by every person who has ever lived', '02:00:00'),
 	('Polaris, the space submarine and the mystery of the polar night',
 	'As novice astronomers, they try to solve this mystery by reasoning and observation.','01:40:00'),
 	('Europe to the stars', 'There is a fantastic invisible world hidden behind the starry sky', '02:00:00'),
-	('Ted’s space adventure', 'We’ll explore the Solar System with a bear named Ted','01:30:00'),
+	('Ted`s space adventure', 'We will explore the Solar System with a bear named Ted','01:30:00'),
 	('Introduction to astrophysics', 'Investigate the physics of our universe at the home of space and time', '01:45:00'),
 	('Out of this world: moons', 
 	'Take a voyage across our solar system as we explore its many moons in this interactive family workshop', '01:40:00'),
