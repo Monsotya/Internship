@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planetarium Service", "Planetarium Service.csproj", "{2C9A726C-1AAC-4452-82D4-72C70FB6C1B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Planetarium Service", "Planetarium Service.csproj", "{2C9A726C-1AAC-4452-82D4-72C70FB6C1B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceInterface", "..\PlanetariumServiceInterface\PlanetariumServiceInterface.csproj", "{9C9CEE48-7596-47B1-B989-3DE4544D2186}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceADO", "..\PlanetariumServiceADO\PlanetariumServiceADO.csproj", "{DF656E3D-9494-43EB-83D6-8F8779175B85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceDapper", "..\PlanetariumServiceDapper\PlanetariumServiceDapper.csproj", "{A9B70E98-E8ED-42CA-AE5F-9CA7CE1FB973}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceModules", "..\PlanetariumServiceModules\PlanetariumServiceModules.csproj", "{00AB6F44-C518-48AF-BD4D-1778770144CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceEF", "..\PlanetariumServiceEF\PlanetariumServiceEF.csproj", "{4D34D837-0FB1-4193-B5A3-F172CAC6E4D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{2C9A726C-1AAC-4452-82D4-72C70FB6C1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C9A726C-1AAC-4452-82D4-72C70FB6C1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C9A726C-1AAC-4452-82D4-72C70FB6C1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9CEE48-7596-47B1-B989-3DE4544D2186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9CEE48-7596-47B1-B989-3DE4544D2186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9CEE48-7596-47B1-B989-3DE4544D2186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9CEE48-7596-47B1-B989-3DE4544D2186}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF656E3D-9494-43EB-83D6-8F8779175B85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF656E3D-9494-43EB-83D6-8F8779175B85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF656E3D-9494-43EB-83D6-8F8779175B85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF656E3D-9494-43EB-83D6-8F8779175B85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9B70E98-E8ED-42CA-AE5F-9CA7CE1FB973}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9B70E98-E8ED-42CA-AE5F-9CA7CE1FB973}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9B70E98-E8ED-42CA-AE5F-9CA7CE1FB973}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9B70E98-E8ED-42CA-AE5F-9CA7CE1FB973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00AB6F44-C518-48AF-BD4D-1778770144CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00AB6F44-C518-48AF-BD4D-1778770144CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00AB6F44-C518-48AF-BD4D-1778770144CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00AB6F44-C518-48AF-BD4D-1778770144CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D34D837-0FB1-4193-B5A3-F172CAC6E4D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D34D837-0FB1-4193-B5A3-F172CAC6E4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D34D837-0FB1-4193-B5A3-F172CAC6E4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D34D837-0FB1-4193-B5A3-F172CAC6E4D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

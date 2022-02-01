@@ -6,7 +6,6 @@ namespace PlanetariumServiceInterface
 {
     public interface IPlanetariumService
     {
-        string ConnectionString { get; set; }
         bool BuyTicket(int ticketId);
         int CreatePerformance(CreatePerformanceInfo info);
         void CreatePoster(List<DateTime> dateOfEvent, CreatePosterInfo infoPoster);
