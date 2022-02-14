@@ -1,0 +1,47 @@
+﻿@model IEnumerable<PlanetariumService.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Choose tickets";
+}
+
+<h1>Choose tickets</h1><br />
+
+<form asp-action="Buy">
+    <tbody>
+        @for (int i = 0; i < Model.Count() / 5; i++)
+        {
+            @for (int j = 0; j < 5; j++)
+
+            {
+                @if (Model.ElementAt(i * 5 + j).TicketStatus == "bought")
+                {
+                    <div class="ticket stopped">
+                        <label>
+                            <input disabled name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id>
+                            <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
+                        </label>
+                    </div>
+                }
+                else
+                {
+                    <div class="ticket action">
+                        <label>
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id>
+                            <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
+                        </label>
+                    </div>
+                }
+            }
+            <br>
+            <br>
+        <br>
+
+        }
+        
+
+        
+
+    </tbody>
+    <br /><br />
+    <input type="submit" value="Buy" class="btn btn-danger"></input>
+</form>
