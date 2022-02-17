@@ -13,7 +13,7 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="DateOfEvent" class="control-label"></label>
+                <label asp="DateOfEvent" class="control-label"></label>
                 <input asp-for="DateOfEvent" class="form-control" />
                 <span asp-validation-for="DateOfEvent" class="text-danger"></span>
             </div><br />
@@ -39,7 +39,7 @@
 <br />
 
 <div>
-    <a asp-action="AddPosters" asp-controller="Home">Back to List</a>
+    <a asp-action="AddPosters" asp-controller="Posters">Back to List</a>
 </div>
 
 @section Scripts {

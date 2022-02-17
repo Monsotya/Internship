@@ -12,7 +12,7 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfEvent)
+            Date of event
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateOfEvent)
@@ -40,7 +40,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /><br />
-        <a asp-action="AddPosters" asp-controller="Home">Back to List</a>
+        <a asp-action="AddPosters" asp-controller="Posters">Back to List</a>
 
     </form>
 </div>

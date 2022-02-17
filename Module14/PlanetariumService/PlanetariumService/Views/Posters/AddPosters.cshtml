@@ -19,14 +19,14 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOfEvent)
+                    @Html.DisplayNameFor(model => model.Performance)
+                </th>
+                <th>
+                    Date of event
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Price)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Performance)
-                </th>
+                </th>                
                 <th>
                     @Html.DisplayNameFor(model => model.Hall)
                 </th>
@@ -38,14 +38,14 @@
             {
                 <tr>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Performance.Title)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.DateOfEvent)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Price)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Performance.Title)
-                    </td>
+                    </td>                    
                     <td>
                         @Html.DisplayFor(modelItem => item.Hall.HallName)
                     </td>
