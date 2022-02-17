@@ -1,4 +1,6 @@
-﻿namespace PlanetariumService.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PlanetariumService.Models
 {
     public class Poster
     {
@@ -7,12 +9,12 @@
         public decimal Price { get; set; }
 
         public int PerformanceId { get; set; }
-        public virtual Performance? Performance { get; set; }
+        public Performance? Performance { get; set; }
 
         public int HallId { get; set; }
-        public virtual Hall? Hall { get; set; }
+        public Hall? Hall { get; set; }
 
-        public virtual IList<Ticket>? Tickets { get; set; }
+        public IList<Ticket>? Tickets { get; set; }
 
     }
 }

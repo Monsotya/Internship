@@ -6,6 +6,6 @@
         public string? TierName { get; set; }
         public decimal Surcharge { get; set; }
         
-        public virtual IList<Ticket>? Tickets { get; set; }
+        public virtual ICollection<Ticket>? Tickets { get; set; }
     }
 }

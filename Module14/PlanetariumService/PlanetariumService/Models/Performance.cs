@@ -6,6 +6,6 @@
         public string? Title { get; set; }
         public string? EventDescription { get; set; }
         public TimeSpan Duration { get; set; }                
-        public virtual IList<Poster>? Posters { get; set; }
+        public virtual ICollection<Poster>? Posters { get; set; }
     }
 }

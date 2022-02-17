@@ -8,6 +8,6 @@
         public string? ClientSurname { get; set; }
         public string? Email { get; set; }
         
-        public virtual IList<Ticket>? Tickets { get; set; }
+        public virtual ICollection<Ticket>? Tickets { get; set; }
     }
 }
