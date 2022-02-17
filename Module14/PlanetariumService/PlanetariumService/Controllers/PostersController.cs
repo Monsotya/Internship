@@ -2,94 +2,93 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlanetariumService.Models;
+using PlanetariumService.Services;
 
 namespace PlanetariumService.Controllers
 {
     public class PostersController : Controller
     {
-        private PlanetariumServiceContext db = new PlanetariumServiceContext();
-        private readonly ILogger<HomeController> _logger;
-
-        public PostersController(ILogger<HomeController> logger)
+        private readonly IPosterService posterService;
+        private readonly IHallService hallService;
+        private readonly IPerformanceService performanceService;
+        private readonly ITicketService ticketService;
+        public PostersController(IPosterService posterService, IHallService hallService,
+            ITicketService ticketService, IPerformanceService performanceService)
         {
-            _logger = logger;
+            this.posterService = posterService;
+            this.hallService = hallService;
+            this.performanceService = performanceService;
+            this.ticketService = ticketService;
         }
-        public IActionResult Order(int? id)
+        public ViewResult Posters(DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            var tickets = from e in db.Tickets
-                          where e.PosterId == id
-                          select e;
-            return View(tickets);
-        }
-
-        public IActionResult Buy(int?[] tickets)
-        {
-            foreach (var ticket in tickets)
+            
+            
+            if (dateFrom == null || dateTo == null)
             {
-                var result = db.Tickets.SingleOrDefault(t => t.Id == ticket);
-                result.TicketStatus = "bought";
+                dateFrom = DateTime.Now;
+                dateTo = DateTime.Now.AddDays(7);
             }
-            db.SaveChanges();
-            return View();
+
+            List<Poster> result = posterService.Posters((DateTime)dateFrom, (DateTime)dateTo);
+
+            return View(result);
         }
-        public async Task<IActionResult> Index()
+        public IActionResult AddPosters()
         {
-            var planetariumServiceContext = db.Posters.Include(p => p.Hall).Include(p => p.Performance);
-            return View(planetariumServiceContext.ToList());
+            return View(posterService.GetAll());
         }
         public IActionResult Create()
         {
-            ViewData["HallId"] = new SelectList(db.Set<Hall>(), "Id", "HallName");
-            ViewData["PerformanceId"] = new SelectList(db.Set<Performance>(), "Id", "Title");
+            ViewData["HallId"] = new SelectList(hallService.GetAll(), "Id", "HallName");
+            ViewData["PerformanceId"] = new SelectList(performanceService.GetAll(), "Id", "Title");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, DateTime? dateFrom = null, DateTime? dateTo = null)
+        public IActionResult Create([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
             if (ModelState.IsValid)
             {
-                db.Posters.Add(poster);
-                for (int i = 1; i <= (int)db.Halls.Find(poster.HallId).Capacity; i++)
-                {
-                    Ticket ticket = new Ticket() { Place = (byte)i, TicketStatus = "available", TierId = 1, PosterId = poster.Id };
-                    db.Tickets.Add(ticket);
-                }
-                await db.SaveChangesAsync();
+                var pos = posterService.Add(poster);
+                CreateTickets(poster);
                 return RedirectToAction(nameof(AddPosters));
             }
-            ViewData["HallId"] = new SelectList(db.Set<Hall>(), "Id", "Id", poster.HallId);
-            ViewData["PerformanceId"] = new SelectList(db.Set<Performance>(), "Id", "Id", poster.PerformanceId);
+            ViewData["HallId"] = new SelectList(hallService.GetAll(), "Id", "Id", poster.HallId);
+            ViewData["PerformanceId"] = new SelectList(performanceService.GetAll(), "Id", "Id", poster.PerformanceId);
             return View(poster);
         }
-        public IActionResult AddPosters()
+
+        public void CreateTickets(Poster poster)
         {
-            var posters = from e in db.Posters
-                          orderby e.Id
-                          select e;
-            return View(posters);
+            for (int i = 1; i <= (int)hallService.GetById(poster.HallId).Capacity; i++)
+            {
+                Ticket ticket = new() { Place = (byte)i, TicketStatus = "available", TierId = 1, PosterId = poster.Id };
+                ticketService.Add(ticket);
+            }
         }
-        public async Task<IActionResult> Edit(int? id)
+        
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var poster = await db.Posters.FindAsync(id);
+            var poster = posterService.GetById((int)id);
             if (poster == null)
             {
                 return NotFound();
             }
-            ViewData["HallId"] = new SelectList(db.Set<Hall>(), "Id", "HallName", poster.HallId);
-            ViewData["PerformanceId"] = new SelectList(db.Set<Performance>(), "Id", "Title", poster.PerformanceId);
+            ViewData["HallId"] = new SelectList(hallService.GetAll(), "Id", "HallName", poster.HallId);
+            ViewData["PerformanceId"] = new SelectList(performanceService.GetAll(), "Id", "Title", poster.PerformanceId);
             return View(poster);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster)
+        public IActionResult Edit(int id, [Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster)
         {
             if (id != poster.Id)
             {
@@ -100,63 +99,36 @@ namespace PlanetariumService.Controllers
             {
                 try
                 {
-                    var posterChanged = db.Posters.Find(poster.Id);
-                    posterChanged.HallId = poster.HallId;
-                    posterChanged.Price = poster.Price;
-                    posterChanged.PerformanceId = poster.PerformanceId;
-                    posterChanged.DateOfEvent = poster.DateOfEvent;
-                    db.SaveChanges();
-                    await db.SaveChangesAsync();
+                    posterService.Update(poster);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PosterExists(poster.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;                    
                 }
                 return RedirectToAction(nameof(AddPosters));
             }
-            ViewData["HallId"] = new SelectList(db.Set<Hall>(), "Id", "Id", poster.HallId);
-            ViewData["PerformanceId"] = new SelectList(db.Set<Performance>(), "Id", "Id", poster.PerformanceId);
+            ViewData["HallId"] = new SelectList(hallService.GetAll(), "Id", "Id", poster.HallId);
+            ViewData["PerformanceId"] = new SelectList(performanceService.GetAll(), "Id", "Id", poster.PerformanceId);
             return View(poster);
         }
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Poster poster = db.Posters
-                .Include(p => p.Hall)
-                .Include(p => p.Performance)
-                .FirstOrDefault(m => m.Id == id);
-            if (poster == null)
-            {
-                return NotFound();
-            }
-
-            return View(poster);
+            return View(posterService.GetById((int)id));
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var poster = await db.Posters.FindAsync(id);
-            db.Posters.Remove(poster);
-            db.SaveChanges();
+            var poster = posterService.GetById(id);
+            posterService.Delete(poster);
             return RedirectToAction(nameof(AddPosters));
         }
 
-        private bool PosterExists(int id)
-        {
-            return db.Posters.Any(e => e.Id == id);
-        }
     }
 }
