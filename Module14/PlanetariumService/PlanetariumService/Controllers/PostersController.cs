@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PlanetariumService.Models;
-using PlanetariumService.Services;
+using PlanetariumModels;
+using PlanetariumServices;
+using PlanetariumServices.Models;
 
 namespace PlanetariumService.Controllers
 {
@@ -12,13 +14,15 @@ namespace PlanetariumService.Controllers
         private readonly IHallService hallService;
         private readonly IPerformanceService performanceService;
         private readonly ITicketService ticketService;
+        private readonly IMapper mapper;
         public PostersController(IPosterService posterService, IHallService hallService,
-            ITicketService ticketService, IPerformanceService performanceService)
+            ITicketService ticketService, IPerformanceService performanceService, IMapper mapper)
         {
             this.posterService = posterService;
             this.hallService = hallService;
             this.performanceService = performanceService;
             this.ticketService = ticketService;
+            this.mapper = mapper;
         }
         public ViewResult Posters(DateTime? dateFrom = null, DateTime? dateTo = null)
         {
@@ -29,8 +33,8 @@ namespace PlanetariumService.Controllers
                 dateFrom = DateTime.Now;
                 dateTo = DateTime.Now.AddDays(7);
             }
-
-            List<Poster> result = posterService.Posters((DateTime)dateFrom, (DateTime)dateTo);
+            List < Poster > p = posterService.Posters((DateTime)dateFrom, (DateTime)dateTo);
+            List<PosterUI> result = mapper.Map<List<PosterUI>>(p);
 
             return View(result);
         }
@@ -45,9 +49,14 @@ namespace PlanetariumService.Controllers
             return View();
         }
 
+        public IPosterService GetPosterService()
+        {
+            return posterService;
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, DateTime? dateFrom = null, DateTime? dateTo = null)
+        public IActionResult Create([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
             if (ModelState.IsValid)
             {

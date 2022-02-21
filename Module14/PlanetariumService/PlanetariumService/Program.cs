@@ -1,12 +1,23 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using PlanetariumService.Models;
-using PlanetariumService.Repositories;
-using PlanetariumService.Services;
+using PlanetariumModels;
+using PlanetariumRepositories;
+using PlanetariumService.Profiles;
+using PlanetariumServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+/*var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new TicketProfile());
+    mc.AddProfile(new HallProfile());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);*/
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<PlanetariumServiceContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("PlanetariumServiceContext"), builder => builder.EnableRetryOnFailure()));
 builder.Services.AddTransient<PlanetariumServiceContext>();

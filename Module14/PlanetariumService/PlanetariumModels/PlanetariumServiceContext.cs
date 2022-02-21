@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PlanetariumServices.Models
+namespace PlanetariumModels
 {
     public class PlanetariumServiceContext : DbContext
     {
@@ -16,12 +16,12 @@ namespace PlanetariumServices.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PerformanceUI>().ToTable("Performance");
-            modelBuilder.Entity<PosterUI>().ToTable("Poster");
-            modelBuilder.Entity<TicketUI>().ToTable("Ticket");
-            modelBuilder.Entity<TierUI>().ToTable("Tier");
-            modelBuilder.Entity<OrdersUI>().ToTable("Orders");
-            modelBuilder.Entity<HallUI>().ToTable("Hall");
+            modelBuilder.Entity<Performance>().ToTable("Performance");
+            modelBuilder.Entity<Poster>().ToTable("Poster");
+            modelBuilder.Entity<Ticket>().ToTable("Ticket");
+            modelBuilder.Entity<Tier>().ToTable("Tier");
+            modelBuilder.Entity<Orders>().ToTable("Orders");
+            modelBuilder.Entity<Hall>().ToTable("Hall");
 
             /*modelBuilder.Entity<Poster>()
                         .HasOne(p => p.Hall)
@@ -45,14 +45,12 @@ namespace PlanetariumServices.Models
                        .WithMany(b => b.Tickets)
                        .HasForeignKey(p => p.PosterId);*/
         }
-        /*public DbSet<Performance> Performances { get; set; }
+        public DbSet<Performance> Performances { get; set; }
         public DbSet<Poster> Posters { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Tier> Tiers { get; set; }
         public DbSet<Hall> Halls { get; set; }
-
-        */
                 
     }
 }

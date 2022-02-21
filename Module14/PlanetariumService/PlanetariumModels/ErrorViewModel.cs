@@ -1,4 +1,4 @@
-namespace PlanetariumServices.Models
+namespace PlanetariumModels
 {
     public class ErrorViewModel
     {

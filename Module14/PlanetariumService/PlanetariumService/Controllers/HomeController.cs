@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PlanetariumService.Models;
+using PlanetariumModels;
 using System.Diagnostics;
 
 namespace PlanetariumService.Controllers

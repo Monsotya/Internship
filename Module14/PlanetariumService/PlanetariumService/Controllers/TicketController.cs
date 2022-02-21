@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PlanetariumService.Services;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PlanetariumServices;
+using PlanetariumServices.Models;
 
 namespace PlanetariumService.Controllers
 {
     public class TicketController : Controller
     {
         private readonly ITicketService ticketService;
-        public TicketController(ITicketService ticketService)
+        private readonly IMapper mapper;
+        public TicketController(ITicketService ticketService, IMapper mapper)
         {
             this.ticketService = ticketService;
+            this.mapper = mapper;
         }
         public IActionResult Order(int? id)
         {
@@ -16,7 +20,7 @@ namespace PlanetariumService.Controllers
             {
                 return NotFound();
             }
-            var tickets = ticketService.GetTicketsByPoster((int)id);
+            var tickets = mapper.Map<List<TicketUI>>(ticketService.GetTicketsByPoster((int)id));
             return View(tickets);
         }
 
