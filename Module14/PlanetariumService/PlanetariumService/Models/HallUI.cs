@@ -1,4 +1,4 @@
-﻿namespace PlanetariumServices.Models
+﻿namespace PlanetariumService.Models
 {
     public class HallUI
     {
