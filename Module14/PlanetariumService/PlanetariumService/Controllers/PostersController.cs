@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlanetariumModels;
 using PlanetariumServices;
-using PlanetariumServices.Models;
+using PlanetariumService.Models;
 
 namespace PlanetariumService.Controllers
 {
@@ -26,15 +26,15 @@ namespace PlanetariumService.Controllers
         }
         public ViewResult Posters(DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            
-            
+
+
             if (dateFrom == null || dateTo == null)
             {
                 dateFrom = DateTime.Now;
                 dateTo = DateTime.Now.AddDays(7);
             }
-            List < Poster > p = posterService.Posters((DateTime)dateFrom, (DateTime)dateTo);
-            List<PosterUI> result = mapper.Map<List<PosterUI>>(p);
+            List<Poster> posters = posterService.Posters((DateTime)dateFrom, (DateTime)dateTo);
+            List<PosterUI> result = mapper.Map<List<PosterUI>>(posters);
 
             return View(result);
         }
@@ -77,7 +77,7 @@ namespace PlanetariumService.Controllers
                 ticketService.Add(ticket);
             }
         }
-        
+
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -112,7 +112,7 @@ namespace PlanetariumService.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    throw;                    
+                    throw;
                 }
                 return RedirectToAction(nameof(AddPosters));
             }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PlanetariumServices;
-using PlanetariumServices.Models;
+using PlanetariumService.Models;
 
 namespace PlanetariumService.Controllers
 {
