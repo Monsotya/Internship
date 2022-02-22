@@ -1,5 +1,4 @@
 ﻿using PlanetariumModels;
-using PlanetariumModels;
 using PlanetariumRepositories;
 
 namespace PlanetariumServices
