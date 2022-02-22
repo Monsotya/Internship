@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumService", "PlanetariumService\PlanetariumService.csproj", "{5D48B210-F242-4487-B398-445AB8D011F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumService", "PlanetariumService\PlanetariumService.csproj", "{5D48B210-F242-4487-B398-445AB8D011F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumModels", "..\..\Module14\PlanetariumService\PlanetariumModels\PlanetariumModels.csproj", "{282E3107-B20A-497E-948A-F6E7FFA8329D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumRepositories", "..\..\Module14\PlanetariumService\PlanetariumRepositories\PlanetariumRepositories.csproj", "{9F511A1E-6CF8-4F5E-9552-0A9BAE1674B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumServices", "..\..\Module14\PlanetariumService\PlanetariumServices\PlanetariumServices.csproj", "{83993E9C-0381-48F5-ADCF-F5AB88DCA071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{5D48B210-F242-4487-B398-445AB8D011F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D48B210-F242-4487-B398-445AB8D011F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D48B210-F242-4487-B398-445AB8D011F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{282E3107-B20A-497E-948A-F6E7FFA8329D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{282E3107-B20A-497E-948A-F6E7FFA8329D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{282E3107-B20A-497E-948A-F6E7FFA8329D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{282E3107-B20A-497E-948A-F6E7FFA8329D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F511A1E-6CF8-4F5E-9552-0A9BAE1674B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F511A1E-6CF8-4F5E-9552-0A9BAE1674B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F511A1E-6CF8-4F5E-9552-0A9BAE1674B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F511A1E-6CF8-4F5E-9552-0A9BAE1674B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83993E9C-0381-48F5-ADCF-F5AB88DCA071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83993E9C-0381-48F5-ADCF-F5AB88DCA071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83993E9C-0381-48F5-ADCF-F5AB88DCA071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83993E9C-0381-48F5-ADCF-F5AB88DCA071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
