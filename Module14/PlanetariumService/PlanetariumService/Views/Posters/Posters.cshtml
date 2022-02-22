@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PlanetariumServices.Models.PosterUI>
+﻿@using PlanetariumService.Models
+@model IEnumerable<PlanetariumService.Models.PosterUI>
 
 @{
     ViewData["Title"] = "Posters";
@@ -59,7 +60,7 @@
                         @Html.DisplayFor(modelItem => item.Hall.HallName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => (item.Tickets.Where(x => x.TicketStatus == "available").Count()))
+                        @Html.DisplayFor(modelItem => item.Tickets.Where(x => x.TicketStatus == "available").ToList<TicketUI>().Count)
                     </td>
                     <td>
                         <a asp-action="Order" class="btn btn-primary" asp-controller="Ticket" asp-route-id="@item.Id">Order</a>
