@@ -1,0 +1,73 @@
+﻿@using PlanetariumService.Models
+@model IEnumerable<PlanetariumService.Models.PosterUI>
+
+@{
+    ViewData["Title"] = "Posters";
+}
+<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width = device-width" />
+    <title>Posters</title>
+</head>
+
+<body>
+    @using (Html.BeginForm())
+        {
+         <p>Choose date interval for posters</p>
+         <input name="dateFrom" type="date" value="@(DateTime.Now.ToString("yyyy-MM-dd"))"  />
+         <input name="dateTo" type="date" value="@(DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"))"  />
+         <input type="submit" value="Search" />
+        }
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Performance)
+                </th>
+                <th>
+                    Date of event
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Hall)
+                </th>
+                <th>
+                   Tickets left
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Performance.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateOfEvent)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hall.HallName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tickets.Where(x => x.TicketStatus == "available").ToList<TicketUI>().Count)
+                    </td>
+                    <td>
+                        <a asp-action="Order" class="btn btn-primary" asp-controller="Ticket" asp-route-id="@item.Id">Order</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

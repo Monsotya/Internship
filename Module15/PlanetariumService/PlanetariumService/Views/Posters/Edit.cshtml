@@ -1,0 +1,50 @@
+﻿@model PlanetariumModels.Poster
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Poster</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="DateOfEvent" class="control-label"></label>
+                <input asp-for="DateOfEvent" class="form-control" />
+                <span asp-validation-for="DateOfEvent" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label asp-for="PerformanceId" class="control-label"></label>
+                <select asp-for="PerformanceId" class="form-control" asp-items="ViewBag.PerformanceId"></select>
+                <span asp-validation-for="PerformanceId" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <label asp-for="HallId" class="control-label"></label>
+                <select asp-for="HallId" class="form-control" asp-items="ViewBag.HallId"></select>
+                <span asp-validation-for="HallId" class="text-danger"></span>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div><br />
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AddPosters" asp-controller="Posters">Back to List</a>
+    
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
