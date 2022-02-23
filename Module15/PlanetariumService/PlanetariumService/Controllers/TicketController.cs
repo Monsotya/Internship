@@ -6,7 +6,7 @@ using PlanetariumService.Models;
 namespace PlanetariumService.Controllers
 {
     [ApiController]
-    public class TicketController : Controller
+    public class TicketController : ControllerBase
     {
         private readonly ITicketService ticketService;
         private readonly IMapper mapper;
@@ -17,25 +17,25 @@ namespace PlanetariumService.Controllers
         }
         [Route("Ticket/Order")]
         [HttpGet]
-        public IActionResult Order(int? id)
+        public ActionResult<List<TicketUI>> Order(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var tickets = mapper.Map<List<TicketUI>>(ticketService.GetTicketsByPoster((int)id));
-            return View(tickets);
-        }        
+            List<TicketUI> tickets = mapper.Map<List<TicketUI>>(ticketService.GetTicketsByPoster((int)id));
+            return tickets;
+        }
         [Route("Ticket/Buy")]
-        [HttpGet]
-        public IActionResult Buy(int[]? tickets)
+        [HttpPost]
+        public ActionResult<int> Buy([FromQuery] int[]? tickets)
         {
             if (tickets.Length == 0)
             {
-                return RedirectToAction("Posters", "Posters");
+                return 0;
             }
             ticketService.BuyTickets(tickets);
-            return View();
+            return tickets.Count();
         }
     }
 }
