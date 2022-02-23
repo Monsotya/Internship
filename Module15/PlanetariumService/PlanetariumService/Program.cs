@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using PlanetariumModels;
 using PlanetariumRepositories;
 using PlanetariumService.Profiles;
@@ -14,7 +15,18 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson(options =>
 );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Planetarium service",
+        Description = "A simple example ASP.NET Core Web API",        
+    });
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 var mapperConfig = new MapperConfiguration(mc =>
 {
     mc.AddProfile(new OneProfile());
@@ -52,7 +64,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.UseSwagger(c =>
+    {
+        c.SerializeAsV2 = true;
+    });
     app.UseSwaggerUI();
 }
 

@@ -15,6 +15,10 @@ namespace PlanetariumService.Controllers
             this.ticketService = ticketService;
             this.mapper = mapper;
         }
+
+        /// <summary>
+        /// Returns tickets of a poster by id
+        /// </summary>
         [Route("Ticket/Order")]
         [HttpGet]
         public ActionResult<List<TicketUI>> Order(int? id)
@@ -26,6 +30,10 @@ namespace PlanetariumService.Controllers
             List<TicketUI> tickets = mapper.Map<List<TicketUI>>(ticketService.GetTicketsByPoster((int)id));
             return tickets;
         }
+
+        /// <summary>
+        /// Changes ticket status to "bought"
+        /// </summary>
         [Route("Ticket/Buy")]
         [HttpPost]
         public ActionResult<int> Buy([FromQuery] int[]? tickets)

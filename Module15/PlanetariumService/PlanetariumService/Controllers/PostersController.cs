@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using PlanetariumModels;
 using PlanetariumServices;
 using PlanetariumService.Models;
@@ -26,6 +24,20 @@ namespace PlanetariumService.Controllers
             this.mapper = mapper;
         }
 
+        /// <summary>
+        /// Returns a poster
+        /// </summary>
+        [Route("Posters/PosterDetails")]
+        [HttpGet]
+        public ActionResult<PosterUI> PosterDetails(int id)
+        {
+            PosterUI poster = mapper.Map<PosterUI>(posterService.GetById(id));
+            return poster;
+        }
+
+        /// <summary>
+        /// Returns posters of in a chosen time interval
+        /// </summary>
         [Route("Posters/Posters")]
         [HttpGet]
         public ActionResult<List<PosterUI>> Posters(DateTime? dateFrom = null, DateTime? dateTo = null)
@@ -43,6 +55,9 @@ namespace PlanetariumService.Controllers
             return result;
         }
 
+        /// <summary>
+        /// Returns all posters
+        /// </summary>
         [Route("Posters/AddPosters")]
         [HttpGet]
         public ActionResult<List<PosterUI>> AddPosters()
@@ -50,45 +65,57 @@ namespace PlanetariumService.Controllers
             return mapper.Map<List<PosterUI>>(posterService.GetAll());
         }
 
+        /// <summary>
+        /// Creates a poster
+        /// </summary>
         [Route("Posters/Create")]
-        [HttpPost]
-        public ActionResult<Poster> Create([FromQuery][Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService, DateTime? dateFrom = null, DateTime? dateTo = null)
+        [HttpPut]
+        public ActionResult<Poster> Create([FromQuery][Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService)
         {
             if (ModelState.IsValid)
             {
                 var pos = posterService.Add(poster);
-                CreateTickets(poster);
+                CreateTickets(poster.Id);
                 return RedirectToAction(nameof(AddPosters));
             }
             return poster;
         }
 
+        /// <summary>
+        /// Creates tickets to a poster
+        /// </summary>
         [Route("Posters/CreateTickets")]
-        [HttpPost]
-        public void CreateTickets([FromQuery] Poster poster)
+        [HttpPut]
+        public void CreateTickets([FromQuery] int id)
         {
+            Poster poster = posterService.GetById(id);
             for (int i = 1; i <= (int)hallService.GetById(poster.HallId).Capacity; i++)
             {
                 Ticket ticket = new() { Place = (byte)i, TicketStatus = "available", TierId = 1, PosterId = poster.Id };
                 ticketService.Add(ticket);
             }
         }
-
+        /// <summary>
+        /// Changes poster by id
+        /// </summary>
         [Route("Posters/Edit")]
         [HttpPost]
-        public ActionResult<Poster> Edit([FromQuery] int id, Poster poster)
+        public ActionResult<Poster> Edit([FromQuery] int id, [Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster)
         {
             if (id != poster.Id)
             {
                 return NotFound();
             }
 
-            posterService.Update(poster);            
+            posterService.Update(poster);
             return poster;
         }
 
+        /// <summary>
+        /// Deletes a poster by id
+        /// </summary>
         [Route("Posters/Delete")]
-        [HttpPost]
+        [HttpDelete]
         public ActionResult<int> Delete([FromQuery] int id)
         {
             var poster = posterService.GetById(id);
