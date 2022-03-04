@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PlanetariumServices;
 using PlanetariumService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PlanetariumService.Controllers
 {
@@ -20,7 +21,7 @@ namespace PlanetariumService.Controllers
         /// Returns tickets of a poster by id
         /// </summary>
         [Route("Ticket/Order")]
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult<List<TicketUI>> Order(int? id)
         {
             if (id == null)
@@ -35,7 +36,7 @@ namespace PlanetariumService.Controllers
         /// Changes ticket status to "bought"
         /// </summary>
         [Route("Ticket/Buy")]
-        [HttpPost]
+        [HttpPut, Authorize]
         public ActionResult<int> Buy([FromQuery] int[]? tickets)
         {
             if (tickets.Length == 0)

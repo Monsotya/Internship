@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PlanetariumModels;
 using PlanetariumServices;
 using PlanetariumService.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PlanetariumService.Controllers
 {
@@ -28,7 +29,7 @@ namespace PlanetariumService.Controllers
         /// Returns a poster
         /// </summary>
         [Route("Posters/PosterDetails")]
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult<PosterUI> PosterDetails(int id)
         {
             PosterUI poster = mapper.Map<PosterUI>(posterService.GetById(id));
@@ -39,7 +40,7 @@ namespace PlanetariumService.Controllers
         /// Returns posters of in a chosen time interval
         /// </summary>
         [Route("Posters/Posters")]
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult<List<PosterUI>> Posters(DateTime? dateFrom = null, DateTime? dateTo = null)
         {
 
@@ -59,7 +60,7 @@ namespace PlanetariumService.Controllers
         /// Returns all posters
         /// </summary>
         [Route("Posters/AddPosters")]
-        [HttpGet]
+        [HttpGet, AllowAnonymous]
         public ActionResult<List<PosterUI>> AddPosters()
         {
             return mapper.Map<List<PosterUI>>(posterService.GetAll());
@@ -69,7 +70,7 @@ namespace PlanetariumService.Controllers
         /// Creates a poster
         /// </summary>
         [Route("Posters/Create")]
-        [HttpPut]
+        [HttpPost, Authorize]
         public ActionResult<Poster> Create([FromQuery][Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService)
         {
             if (ModelState.IsValid)
@@ -85,7 +86,7 @@ namespace PlanetariumService.Controllers
         /// Creates tickets to a poster
         /// </summary>
         [Route("Posters/CreateTickets")]
-        [HttpPut]
+        [HttpPost, Authorize]
         public void CreateTickets([FromQuery] int id)
         {
             Poster poster = posterService.GetById(id);
@@ -99,7 +100,7 @@ namespace PlanetariumService.Controllers
         /// Changes poster by id
         /// </summary>
         [Route("Posters/Edit")]
-        [HttpPost]
+        [HttpPut, Authorize]
         public ActionResult<Poster> Edit([FromQuery] int id, [Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster)
         {
             if (id != poster.Id)
@@ -115,7 +116,7 @@ namespace PlanetariumService.Controllers
         /// Deletes a poster by id
         /// </summary>
         [Route("Posters/Delete")]
-        [HttpDelete]
+        [HttpDelete, Authorize(Roles = "Admin")]
         public ActionResult<int> Delete([FromQuery] int id)
         {
             var poster = posterService.GetById(id);

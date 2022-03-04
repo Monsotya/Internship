@@ -22,28 +22,7 @@ namespace PlanetariumModels
             modelBuilder.Entity<Tier>().ToTable("Tier");
             modelBuilder.Entity<Orders>().ToTable("Orders");
             modelBuilder.Entity<Hall>().ToTable("Hall");
-
-            /*modelBuilder.Entity<Poster>()
-                        .HasOne(p => p.Hall)
-                        .WithMany(b => b.Posters)
-                        .HasForeignKey(p => p.HallId);
-            modelBuilder.Entity<Poster>()
-                       .HasOne(p => p.Performance)
-                       .WithMany(b => b.Posters)
-                       .HasForeignKey(p => p.PerformanceId);
-
-            modelBuilder.Entity<Ticket>()
-                       .HasOne(p => p.Tier)
-                       .WithMany(b => b.Tickets)
-                       .HasForeignKey(p => p.TierId);
-            modelBuilder.Entity<Ticket>()
-                       .HasOne(p => p.Order)
-                       .WithMany(b => b.Tickets)
-                       .HasForeignKey(p => p.OrderId);
-            modelBuilder.Entity<Ticket>()
-                       .HasOne(p => p.Poster)
-                       .WithMany(b => b.Tickets)
-                       .HasForeignKey(p => p.PosterId);*/
+            modelBuilder.Entity<Users>().ToTable("Users");
         }
         public DbSet<Performance> Performances { get; set; }
         public DbSet<Poster> Posters { get; set; }
@@ -51,6 +30,7 @@ namespace PlanetariumModels
         public DbSet<Orders> Orders { get; set; }
         public DbSet<Tier> Tiers { get; set; }
         public DbSet<Hall> Halls { get; set; }
+        public DbSet<Users> Users { get; set; }
                 
     }
 }
