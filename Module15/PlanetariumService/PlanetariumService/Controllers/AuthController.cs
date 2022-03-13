@@ -16,50 +16,90 @@ namespace PlanetariumService.Controllers
         public static UserUI user = new UserUI();
         private readonly IConfiguration configuration;
         private readonly IUserService userService;
+        private readonly ILogger<AuthController> log;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IUserService userService, ILogger<AuthController> log)
         {
+            this.log = log;
             this.configuration = configuration;
             this.userService = userService;
         }
 
+        /// <summary>
+        /// Gets user`s name
+        /// </summary>
         [HttpGet, Authorize]
         public ActionResult<string> GetMe()
-        {
-            var userName = userService.GetMyName();
-            return Ok(userName);
+        {            
+            try
+            {
+                var userName = userService.GetMyName();
+                log.LogInformation("Got user`s name");
+                return Ok(userName);
+            }
+            catch (Exception exception)
+            {
+                log.LogError(exception, "Something went wrong");
+                throw;
+            }            
         }
 
+        /// <summary>
+        /// Registration for new user
+        /// </summary>
         [HttpPost("register")]
         public async Task<ActionResult<UserUI>> Register(Users request)
         {
             user.Username = request.Username;
             user.Password = request.UserPassword;
             user.Role = request.UserRole;
-
-            userService.Add(request);
-            return Ok(user);
+            try
+            {
+                userService.Add(request);
+                log.LogInformation("New user added");
+                return Ok(user);
+            }
+            catch (Exception exception)
+            {
+                log.LogError(exception, "Registration failed");
+                throw;
+            }            
         }
 
+        /// <summary>
+        /// Login for user
+        /// </summary>
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(Users request)
         {
 
             if (userService.GetAllUsers().FirstOrDefault(x => x.Username == request.Username) == null)
             {
+                log.LogError("Not found");
                 return BadRequest("User not found.");
             }
 
             if (userService.GetAllUsers().FirstOrDefault(x => x.Username == request.Username).UserPassword != request.UserPassword)
             {
+                log.LogError("Wrong password");
                 return BadRequest("Wrong password.");
             }
 
             user.Username = request.Username;
             user.Password = request.UserPassword;
-            user.Role = userService.GetAllUsers().FirstOrDefault(x => x.Username == request.Username).UserRole;
-            string token = CreateToken(user);
-            return Ok(token);
+            try
+            {
+                user.Role = userService.GetAllUsers().FirstOrDefault(x => x.Username == request.Username).UserRole;
+                string token = CreateToken(user);
+                log.LogInformation("Login was successful");
+                return Ok(token);
+            }
+            catch (Exception exception)
+            {
+                log.LogError(exception, "Login failed");
+                throw;
+            }
+            
         }
 
         private string CreateToken(UserUI user)

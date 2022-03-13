@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog;
+using NLog.Web;
 using PlanetariumModels;
 using PlanetariumRepositories;
 using PlanetariumService.Profiles;
@@ -95,6 +97,24 @@ builder.Services.AddTransient<IPosterService, PosterService>();
 builder.Services.AddTransient<IHallService, HallService>();
 builder.Services.AddTransient<IPerformanceService, PerformanceService>();
 
+var logger = LogManager.GetCurrentClassLogger();
+
+try{    
+    builder.Logging.ClearProviders();
+    builder.Logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+    builder.Logging.AddNLog("nlog.config"); 
+}
+catch (Exception exception)
+{
+    logger.Error(exception, "Stopped program because of exception");
+    throw;
+}
+finally
+{
+    LogManager.Shutdown();
+}
+
+
 builder.Host.UseDefaultServiceProvider(o =>
 {
     o.ValidateOnBuild = true;
@@ -120,4 +140,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
