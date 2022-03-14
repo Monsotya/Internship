@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace PlanetariumService.Controllers
 {
     [ApiController]
-    public class PostersController : ControllerBase
+    public class PostersController : ControllerBase, IPostersController
     {
         private readonly IPosterService posterService;
         private readonly IHallService hallService;
@@ -43,7 +43,7 @@ namespace PlanetariumService.Controllers
             {
                 log.LogError(exception, "Buying tickets went wrong");
                 throw;
-            }            
+            }
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace PlanetariumService.Controllers
                 log.LogError(exception, "Something went wrong");
                 throw;
             }
-            
+
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace PlanetariumService.Controllers
             {
                 log.LogError(exception, "Something went wrong");
                 throw;
-            }            
+            }
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace PlanetariumService.Controllers
         /// </summary>
         [Route("Posters/Create")]
         [HttpPost, Authorize]
-        public ActionResult<Poster> Create([FromQuery][Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService)
+        public ActionResult<Poster> Create([FromQuery][Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster)
         {
             if (ModelState.IsValid)
             {
@@ -117,7 +117,7 @@ namespace PlanetariumService.Controllers
                 {
                     log.LogError(exception, "Creating poster went wrong");
                     throw;
-                }                
+                }
             }
             return poster;
         }
@@ -144,7 +144,7 @@ namespace PlanetariumService.Controllers
                 log.LogError(exception, "Something went wrong");
                 throw;
             }
-            
+
         }
         /// <summary>
         /// Changes poster by id
@@ -170,7 +170,7 @@ namespace PlanetariumService.Controllers
             {
                 log.LogError(exception, "Something went wrong");
                 throw;
-            }            
+            }
         }
 
         /// <summary>

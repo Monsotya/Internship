@@ -29,7 +29,7 @@ namespace PlanetariumService.Controllers
             if (id == null)
             {
                 log.LogError("Not found");
-                return NotFound();
+                throw new NullReferenceException();
             }
             try
             {
@@ -49,7 +49,7 @@ namespace PlanetariumService.Controllers
         /// </summary>
         [Route("Ticket/Buy")]
         [HttpPut, Authorize]
-        public ActionResult<int> Buy([FromQuery] int[]? tickets)
+        public ActionResult<int> Buy([FromQuery] int[] tickets)
         {
             if (tickets.Length == 0)
             {
