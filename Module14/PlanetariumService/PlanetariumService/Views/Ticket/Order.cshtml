@@ -4,17 +4,10 @@
     ViewData["Title"] = "Choose tickets";
 }
 
-<h1>Choose tickets</h1><br />
-<div class="row">
-        <div class="col-12">
-            <hr />
-        </div>
-</div>
-    <div class="row">
-        <div class="col-6">
-            <ul id="messagesList"></ul>
-        </div>
-    </div>
+<h1>Choose tickets</h1>
+<br />
+<span id="messagesList"></span>
+<br />
 <form asp-action="Buy">
     <tbody>
         @for (int i = 0; i < Model.Count() / 5; i++)
@@ -26,7 +19,7 @@
                 {
                     <div class="ticket stopped">
                         <label>
-                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance=@Model.ElementAt(i*5 + j).Poster.Performance.Title date=@Model.ElementAt(i*5 + j).Poster.DateOfEvent>
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent">
                             <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
                         </label>
                     </div>
@@ -45,12 +38,12 @@
             }
             <br>
             <br>
-        <br>
+            <br>
 
         }
-        
 
-        
+
+
 
     </tbody>
     <br /><br />
