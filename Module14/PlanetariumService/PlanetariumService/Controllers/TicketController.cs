@@ -24,7 +24,7 @@ namespace PlanetariumService.Controllers
             return View(tickets);
         }
 
-        public IActionResult Buy(int[]? tickets)
+        public IActionResult Buy(int[] tickets)
         {
             if (tickets.Length == 0)
             {

@@ -22,7 +22,7 @@ namespace PlanetariumRepositories
 
         public List<Ticket> GetTicketsByPoster(int id)
         {
-            return GetAll().Where(x => x.PosterId == id).ToList<Ticket>();
+            return GetAll().Where(x => x.PosterId == id).Include(x => x.Poster).Include(x => x.Poster.Performance).ToList<Ticket>();
         }
     }
 }

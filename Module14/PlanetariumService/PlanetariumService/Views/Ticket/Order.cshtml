@@ -5,7 +5,16 @@
 }
 
 <h1>Choose tickets</h1><br />
-
+<div class="row">
+        <div class="col-12">
+            <hr />
+        </div>
+</div>
+    <div class="row">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
 <form asp-action="Buy">
     <tbody>
         @for (int i = 0; i < Model.Count() / 5; i++)
@@ -17,7 +26,7 @@
                 {
                     <div class="ticket stopped">
                         <label>
-                            <input disabled name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id>
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance=@Model.ElementAt(i*5 + j).Poster.Performance.Title date=@Model.ElementAt(i*5 + j).Poster.DateOfEvent>
                             <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
                         </label>
                     </div>
@@ -26,11 +35,13 @@
                 {
                     <div class="ticket action">
                         <label>
-                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id>
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent">
                             <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
                         </label>
                     </div>
                 }
+
+
             }
             <br>
             <br>
@@ -43,5 +54,8 @@
 
     </tbody>
     <br /><br />
-    <input type="submit" value="Buy" class="btn btn-danger" asp-controller="Ticket" asp-action="Buy"></input>
+    <input id="buyButton" type="submit" value="Buy" class="btn btn-danger" asp-controller="Ticket" asp-action="Buy">
 </form>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/lib/microsoft/signalr/buyingTickets.js"></script>
