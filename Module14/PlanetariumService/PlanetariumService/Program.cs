@@ -31,6 +31,7 @@ builder.Services.AddTransient<ITicketService, TicketService>();
 builder.Services.AddTransient<IPosterService, PosterService>();
 builder.Services.AddTransient<IHallService, HallService>();
 builder.Services.AddTransient<IPerformanceService, PerformanceService>();
+builder.Services.AddTransient<IOrderService, OrderService>();
 
 builder.Services.AddSignalR();
 

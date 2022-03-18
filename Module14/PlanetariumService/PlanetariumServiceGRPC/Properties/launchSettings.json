@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "PlanetariumServiceGRPC": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:7130;http://localhost:7330",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

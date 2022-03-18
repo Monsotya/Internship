@@ -10,12 +10,14 @@ namespace PlanetariumRepositories
         }
 
         public Task<Ticket> GetByIdAsync(int id) => GetAll().FirstOrDefaultAsync(x => x.Id == id);
-        public async Task BuyTickets(int[]? tickets)
+        public async Task BuyTickets(int[]? tickets, Orders order)
         {
             foreach (int ticket in tickets)
             {
                 var result = GetByIdAsync(ticket).Result;
                 result.TicketStatus = "bought";
+                result.OrderId = order.Id;
+                result.Order = order;
                 await UpdateAsync(result);
             }
         }

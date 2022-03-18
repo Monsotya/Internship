@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.44.0" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.44.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.44.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -16,7 +23,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PlanetariumServiceGRPC\PlanetariumServiceGRPC.csproj" />
     <ProjectReference Include="..\PlanetariumServices\PlanetariumServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\PlanetariumServiceGRPC\Protos\planetarium.proto" GrpcServices="Client">
+      <Link>Protos\planetarium.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option csharp_namespace = "PlanetariumServiceGRPC";
+
+package planetarium;
+
+service Planetarium {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc SendEmail (EmailInfo) returns (EmailMessage);
+  rpc BuyTickets (TicketsInfo) returns (TicketsMessage);
+}
+
+message TicketsInfo {
+  int32 quantity = 1;
+  int32 posterId = 2;
+  PlanetariumServices.ITicketService ticketSevice = 3;
+  PlanetariumModels.Orders order = 4;
+}
+
+message TicketsMessage {
+  string message = 1;
+}
+
+message EmailInfo {
+  string name = 1;
+  string seats = 2;
+}
+
+message EmailMessage {
+  string message = 1;
+
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}

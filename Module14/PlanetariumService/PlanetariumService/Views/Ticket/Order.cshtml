@@ -9,6 +9,9 @@
 <span id="messagesList"></span>
 <br />
 <form asp-action="Buy">
+<div class="row">
+    <div class="col">
+    
     <tbody>
         @for (int i = 0; i < Model.Count() / 5; i++)
         {
@@ -41,14 +44,30 @@
             <br>
 
         }
-
-
-
-
     </tbody>
     <br /><br />
     <input id="buyButton" type="submit" value="Buy" class="btn btn-danger" asp-controller="Ticket" asp-action="Buy">
+    
+</div>
+<div class="col">
+        <div class="row">
+    <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label"> ClientName</label>
+                <input name="clientName" class="form-control" />
+            </div> <br />
+            <div class="form-group">
+                <label  class="control-label">ClientSurname</label>
+                <input name="clientSurname" class="form-control" />
+            </div><br />
+            <div class="form-group">
+                <label  class="control-label">Email</label>
+                <input name="email" class="form-control" />
+            </div><br />
+    </div>
+</div>
+</div>
+</div>
 </form>
-
 <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
 <script src="~/lib/microsoft/signalr/buyingTickets.js"></script>
