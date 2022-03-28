@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PlanetariumServiceWCF.PlanetariumService" CodeBehind="PlanetariumService.svc.cs" %>

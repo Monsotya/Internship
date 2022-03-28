@@ -37,12 +37,36 @@ document.getElementById("buyButton").addEventListener("click", function (event) 
         return parseInt(item, 10);
     });
     if (seats == "") {
-        var message = "";
+        var counter = 2;
+        for (var checkbox of checkboxes) {
+            if (counter == 0) {
+                var message = "Performance: " + checkboxes[0].getAttribute("performance") + ", date of event: " + checkboxes[0].getAttribute("date") + ". Place/s " + seats;            
+                connection.invoke("SendMessage", message).catch(function (err) {
+                    return console.error(err.toString());
+                });
+            }
+            if (checkbox.getAttribute("status") == "available") {
+                if (seats != "") {
+                    seats = seats + ", " + checkbox.getAttribute("place");
+
+                }
+                else {
+                    seats = checkbox.getAttribute("place");
+                }
+                counter--;
+            }
+        }
+        if (seats == "") {
+            var message = "";
+        } else {
+            var message = "Performance: " + checkboxes[0].getAttribute("performance") + ", date of event: " + checkboxes[0].getAttribute("date") + ". Place/s " + seats;
+        }
     }
     else {
         var message = "Performance: " + checkboxes[0].getAttribute("performance") + ", date of event: " + checkboxes[0].getAttribute("date") + ". Place/s " + seats;
+        connection.invoke("SendMessage", message).catch(function (err) {
+            return console.error(err.toString());
+        });
     }
-    connection.invoke("SendMessage", message).catch(function (err) {
-        return console.error(err.toString());
-    });
+    
 });

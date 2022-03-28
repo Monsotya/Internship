@@ -1,0 +1,73 @@
+{
+  "ExtendedData": {
+    "inputs": [
+      "http://localhost:8733/PlanetariumWCF/PlanetariumService/mex"
+    ],
+    "collectionTypes": [
+      "System.Array",
+      "System.Collections.Generic.Dictionary`2"
+    ],
+    "namespaceMappings": [
+      "*, ServiceReference1"
+    ],
+    "references": [
+      "AutoMapper, {AutoMapper, 11.0.0}",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection, {AutoMapper.Extensions.Microsoft.DependencyInjection, 11.0.0}",
+      "Google.Protobuf, {Google.Protobuf, 3.19.4}",
+      "Grpc.AspNetCore.Server, {Grpc.AspNetCore.Server, 2.44.0}",
+      "Grpc.AspNetCore.Server.ClientFactory, {Grpc.AspNetCore.Server.ClientFactory, 2.44.0}",
+      "Grpc.Core.Api, {Grpc.Core.Api, 2.44.0}",
+      "Grpc.Net.Client, {Grpc.Net.Client, 2.44.0}",
+      "Grpc.Net.ClientFactory, {Grpc.Net.ClientFactory, 2.44.0}",
+      "Grpc.Net.Common, {Grpc.Net.Common, 2.44.0}",
+      "Microsoft.AspNet.SignalR.Core, {Microsoft.AspNet.SignalR.Core, 2.4.3}",
+      "Microsoft.AspNetCore.Connections.Abstractions, {Microsoft.AspNetCore.Connections.Abstractions, 6.0.3}",
+      "Microsoft.AspNetCore.Cryptography.Internal, {Microsoft.AspNetCore.Cryptography.Internal, 6.0.2}",
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation, {Microsoft.AspNetCore.Cryptography.KeyDerivation, 6.0.2}",
+      "Microsoft.AspNetCore.Http.Abstractions, {Microsoft.AspNetCore.Http.Abstractions, 2.2.0}",
+      "Microsoft.AspNetCore.Http.Connections.Client, {Microsoft.AspNetCore.Http.Connections.Client, 6.0.3}",
+      "Microsoft.AspNetCore.Http.Connections.Common, {Microsoft.AspNetCore.Http.Connections.Common, 6.0.3}",
+      "Microsoft.AspNetCore.Http.Features, {Microsoft.AspNetCore.Http.Features, 2.2.0}",
+      "Microsoft.AspNetCore.SignalR.Client, {Microsoft.AspNetCore.SignalR.Client, 6.0.3}",
+      "Microsoft.AspNetCore.SignalR.Client.Core, {Microsoft.AspNetCore.SignalR.Client.Core, 6.0.3}",
+      "Microsoft.AspNetCore.SignalR.Common, {Microsoft.AspNetCore.SignalR.Common, 6.0.3}",
+      "Microsoft.AspNetCore.SignalR.Protocols.Json, {Microsoft.AspNetCore.SignalR.Protocols.Json, 6.0.3}",
+      "Microsoft.Data.SqlClient, {Microsoft.Data.SqlClient, 2.1.4}",
+      "Microsoft.EntityFrameworkCore, {Microsoft.EntityFrameworkCore, 6.0.3}",
+      "Microsoft.EntityFrameworkCore.Abstractions, {Microsoft.EntityFrameworkCore.Abstractions, 6.0.3}",
+      "Microsoft.EntityFrameworkCore.Relational, {Microsoft.EntityFrameworkCore.Relational, 6.0.2}",
+      "Microsoft.EntityFrameworkCore.SqlServer, {Microsoft.EntityFrameworkCore.SqlServer, 6.0.2}",
+      "Microsoft.Extensions.Caching.Abstractions, {Microsoft.Extensions.Caching.Abstractions, 6.0.0}",
+      "Microsoft.Extensions.Caching.Memory, {Microsoft.Extensions.Caching.Memory, 6.0.1}",
+      "Microsoft.Extensions.Configuration.Abstractions, {Microsoft.Extensions.Configuration.Abstractions, 6.0.0}",
+      "Microsoft.Extensions.DependencyInjection, {Microsoft.Extensions.DependencyInjection, 6.0.0}",
+      "Microsoft.Extensions.DependencyInjection.Abstractions, {Microsoft.Extensions.DependencyInjection.Abstractions, 6.0.0}",
+      "Microsoft.Extensions.Features, {Microsoft.Extensions.Features, 6.0.3}",
+      "Microsoft.Extensions.Http, {Microsoft.Extensions.Http, 3.0.3}",
+      "Microsoft.Extensions.Identity.Core, {Microsoft.Extensions.Identity.Core, 6.0.2}",
+      "Microsoft.Extensions.Logging, {Microsoft.Extensions.Logging, 6.0.0}",
+      "Microsoft.Extensions.Logging.Abstractions, {Microsoft.Extensions.Logging.Abstractions, 6.0.1}",
+      "Microsoft.Extensions.Options, {Microsoft.Extensions.Options, 6.0.0}",
+      "Microsoft.Extensions.Primitives, {Microsoft.Extensions.Primitives, 6.0.0}",
+      "Microsoft.IdentityModel.JsonWebTokens, {Microsoft.IdentityModel.JsonWebTokens, 6.8.0}",
+      "Microsoft.IdentityModel.Logging, {Microsoft.IdentityModel.Logging, 6.8.0}",
+      "Microsoft.IdentityModel.Protocols, {Microsoft.IdentityModel.Protocols, 6.8.0}",
+      "Microsoft.IdentityModel.Protocols.OpenIdConnect, {Microsoft.IdentityModel.Protocols.OpenIdConnect, 6.8.0}",
+      "Microsoft.IdentityModel.Tokens, {Microsoft.IdentityModel.Tokens, 6.8.0}",
+      "Microsoft.VisualStudio.Interop, {Microsoft.VisualStudio.Interop, 17.1.32210.191}",
+      "Microsoft.VisualStudio.OLE.Interop, {Microsoft.VisualStudio.OLE.Interop, 17.1.32210.191}",
+      "System.Collections, {System.Collections, 4.3.0}",
+      "System.Collections.Immutable, {System.Collections.Immutable, 6.0.0}",
+      "System.Diagnostics.DiagnosticSource, {System.Diagnostics.DiagnosticSource, 6.0.0}",
+      "System.IdentityModel.Tokens.Jwt, {System.IdentityModel.Tokens.Jwt, 6.8.0}",
+      "System.IO.Pipelines, {System.IO.Pipelines, 6.0.2}",
+      "System.Runtime, {System.Runtime, 4.3.0}",
+      "System.Runtime.CompilerServices.Unsafe, {System.Runtime.CompilerServices.Unsafe, 6.0.0}",
+      "System.Security.Cryptography.Cng, {System.Security.Cryptography.Cng, 4.5.0}",
+      "System.Text.Encodings.Web, {System.Text.Encodings.Web, 4.5.0}",
+      "System.Threading.Channels, {System.Threading.Channels, 6.0.0}"
+    ],
+    "targetFramework": "net6.0",
+    "typeReuseMode": "All"
+  }
+}

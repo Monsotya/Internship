@@ -16,7 +16,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumModels", "Planet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumRepositories", "PlanetariumRepositories\PlanetariumRepositories.csproj", "{5A2E1EAD-9FE9-44D2-BBE3-86D639C1728C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceGRPC", "PlanetariumServiceGRPC\PlanetariumServiceGRPC.csproj", "{A8E1DF29-4CD9-4122-91C2-BD21A43D5811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlanetariumServiceGRPC", "PlanetariumServiceGRPC\PlanetariumServiceGRPC.csproj", "{A8E1DF29-4CD9-4122-91C2-BD21A43D5811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumWCF", "PlanetariumWCF\PlanetariumWCF.csproj", "{23D2D3AF-63EF-4C5D-80B5-B44207221694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumModelsFramework", "PlanetariumModelsFramework\PlanetariumModelsFramework.csproj", "{033EB110-B807-4591-BFBA-27185CF23C7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumWCFHost", "PlanetariumWCFHost\PlanetariumWCFHost.csproj", "{643A6746-1EC2-4F84-A83D-77A9D058C8E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLanetariumWCFClient", "PLanetariumWCFClient\PLanetariumWCFClient.csproj", "{DE91F183-E43C-43D4-8D4E-4D4F77735505}"
+	ProjectSection(ProjectDependencies) = postProject
+		{23D2D3AF-63EF-4C5D-80B5-B44207221694} = {23D2D3AF-63EF-4C5D-80B5-B44207221694}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlanetariumServiceWCF", "PlanetariumServiceWCF\PlanetariumServiceWCF.csproj", "{0AC6A57E-065B-4EEF-AD76-2D275D75B660}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +57,26 @@ Global
 		{A8E1DF29-4CD9-4122-91C2-BD21A43D5811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8E1DF29-4CD9-4122-91C2-BD21A43D5811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8E1DF29-4CD9-4122-91C2-BD21A43D5811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23D2D3AF-63EF-4C5D-80B5-B44207221694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23D2D3AF-63EF-4C5D-80B5-B44207221694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23D2D3AF-63EF-4C5D-80B5-B44207221694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23D2D3AF-63EF-4C5D-80B5-B44207221694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033EB110-B807-4591-BFBA-27185CF23C7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033EB110-B807-4591-BFBA-27185CF23C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033EB110-B807-4591-BFBA-27185CF23C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033EB110-B807-4591-BFBA-27185CF23C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{643A6746-1EC2-4F84-A83D-77A9D058C8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{643A6746-1EC2-4F84-A83D-77A9D058C8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{643A6746-1EC2-4F84-A83D-77A9D058C8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{643A6746-1EC2-4F84-A83D-77A9D058C8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE91F183-E43C-43D4-8D4E-4D4F77735505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE91F183-E43C-43D4-8D4E-4D4F77735505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE91F183-E43C-43D4-8D4E-4D4F77735505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE91F183-E43C-43D4-8D4E-4D4F77735505}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC6A57E-065B-4EEF-AD76-2D275D75B660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC6A57E-065B-4EEF-AD76-2D275D75B660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC6A57E-065B-4EEF-AD76-2D275D75B660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC6A57E-065B-4EEF-AD76-2D275D75B660}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

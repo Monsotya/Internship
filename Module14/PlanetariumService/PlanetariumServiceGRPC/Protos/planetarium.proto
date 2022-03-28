@@ -13,8 +13,6 @@ service Planetarium {
 message TicketsInfo {
   int32 quantity = 1;
   int32 posterId = 2;
-  PlanetariumServices.ITicketService ticketSevice = 3;
-  PlanetariumModels.Orders order = 4;
 }
 
 message TicketsMessage {

@@ -56,12 +56,12 @@ namespace PlanetariumService.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, IPosterService posterService, DateTime? dateFrom = null, DateTime? dateTo = null)
+        public async Task<IActionResult> CreateAsync([Bind("Id,DateOfEvent,Price,PerformanceId,HallId")] Poster poster, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
             if (ModelState.IsValid)
             {
                 var pos = posterService.Add(poster);
-                CreateTickets(poster);
+                await CreateTickets(poster);
                 return RedirectToAction(nameof(AddPosters));
             }
             ViewData["HallId"] = new SelectList(hallService.GetAll(), "Id", "Id", poster.HallId);
@@ -69,12 +69,12 @@ namespace PlanetariumService.Controllers
             return View(poster);
         }
 
-        public void CreateTickets(Poster poster)
+        public async Task CreateTickets(Poster poster)
         {
             for (int i = 1; i <= (int)hallService.GetById(poster.HallId).Capacity; i++)
             {
                 Ticket ticket = new() { Place = (byte)i, TicketStatus = "available", TierId = 1, PosterId = poster.Id };
-                ticketService.Add(ticket);
+                await ticketService.Add(ticket);
             }
         }
 

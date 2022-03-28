@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using PlanetariumModels;
+using PlanetariumRepositories;
 using PlanetariumServiceGRPC.Services;
+using PlanetariumServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+
+builder.Services.AddDbContext<PlanetariumServiceContext>(options => options.UseSqlServer("data source=.; database=Planetarium; integrated security=SSPI", builder => builder.EnableRetryOnFailure()));
+builder.Services.AddTransient<PlanetariumServiceContext>();
+
+builder.Services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddTransient<ITicketRepository, TicketRepository>();
+
+builder.Services.AddTransient<ITicketService, TicketService>();
+
 
 var app = builder.Build();
 

@@ -1,7 +1,8 @@
 using Grpc.Core;
 using PlanetariumModels;
-using PlanetariumServiceGRPC;
+using PlanetariumRepositories;
 using PlanetariumServices;
+using ServiceReference;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
@@ -10,10 +11,12 @@ namespace PlanetariumServiceGRPC.Services
 {
     public class PlanetariumService : Planetarium.PlanetariumBase
     {
-        private readonly ILogger<PlanetariumService> _logger;
-        public PlanetariumService(ILogger<PlanetariumService> logger)
+        private readonly ILogger<PlanetariumService> logger;
+        private readonly ITicketService ticketService;
+        public PlanetariumService(ILogger<PlanetariumService> logger, ITicketService ticketService)
         {
-            _logger = logger;
+            this.logger = logger;
+            this.ticketService = ticketService;
         }
 
         public override Task<HelloReply> SayHello(HelloRequest request, ServerCallContext context)
@@ -25,13 +28,16 @@ namespace PlanetariumServiceGRPC.Services
         }
         public override Task<TicketsMessage> BuyTickets(TicketsInfo request, ServerCallContext context)
         {
-            List<Ticket> tickets = request.TicketService.GetTicketsById(request.PosterId).ToList<Ticket>();
+            List<Ticket> tickets = ticketService.GetTicketsByPoster(request.PosterId);
+            PlanetariumServiceClient client = new PlanetariumServiceClient();
 
             int counter = request.Quantity;
+            int[] places = new int[counter];
             foreach (Ticket ticket in tickets)
             {
                 if (counter == 0)
                 {
+
                     return Task.FromResult(new TicketsMessage
                     {
                         Message = "Buying was successful"
@@ -39,9 +45,12 @@ namespace PlanetariumServiceGRPC.Services
                 }
                 if (ticket.TicketStatus == "available")
                 {
-                    request.TicketService.BuyTickets(ticket.Id, request.Order);
-                }
-                counter--;
+                    //ticketService.BuyTicketsWithoutOrder(new int[] {ticket.Id});
+                    client.BuyTicketsAsync(ticket.Id);
+
+                    counter--;
+                    places[counter] = ticket.Id;
+                }                
             }
 
             return Task.FromResult(new TicketsMessage

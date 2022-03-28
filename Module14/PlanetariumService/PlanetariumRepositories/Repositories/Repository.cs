@@ -75,7 +75,6 @@ namespace PlanetariumRepositories
             {
                 RepositoryPlanetarium.Remove(entity);
                 object p = await RepositoryPlanetarium.SaveChangesAsync();
-
                 return entity;
             }
             catch (Exception ex)

@@ -9,6 +9,7 @@
 <span id="messagesList"></span>
 <br />
 <form asp-action="Buy">
+    <input name="posterId" value=@Model.ElementAt(0).PosterId />
 <div class="row">
     <div class="col">
     
@@ -22,7 +23,7 @@
                 {
                     <div class="ticket stopped">
                         <label>
-                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent">
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent" status="@Model.ElementAt(i*5 + j).TicketStatus">
                             <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
                         </label>
                     </div>
@@ -31,7 +32,7 @@
                 {
                     <div class="ticket action">
                         <label>
-                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent">
+                            <input name="tickets" type="checkbox" value=@Model.ElementAt(i*5 + j).Id place=@Model.ElementAt(i*5 + j).Place performance="@Model.ElementAt(i*5 + j).Poster.Performance.Title" date="@Model.ElementAt(i*5 + j).Poster.DateOfEvent" status="@Model.ElementAt(i*5 + j).TicketStatus">
                             <span>@Html.DisplayFor(modelItem => Model.ElementAt(i*5 + j).Place)</span>
                         </label>
                     </div>
